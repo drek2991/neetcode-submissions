@@ -1,0 +1,13 @@
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        memo = {}
+        def dfs(i, j):
+            if i >= len(s) or j < 0:
+                return 0
+            if s[i]==s[j]:
+                memo[(i, j)] = 1+dfs(i+1, j-1)
+            else:
+                memo[(i, j)] = max(dfs(i+1, j), dfs(i, j-1))
+            return memo[(i, j)]
+        return dfs(0, len(s)-1)
+            
